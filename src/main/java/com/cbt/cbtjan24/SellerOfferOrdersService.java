@@ -26,11 +26,14 @@ public class SellerOfferOrdersService
         SellerOfferOrdersView view = new SellerOfferOrdersView();
         view.setOfferid(offerid);
         view.setOffername(productofferRepository.findById(offerid).get().getOffername());
-        view.setOrderViewList( orders.stream().
-                filter(order -> orderstatusRepository.findById(order.getOrderid()).get().
-                        getStatus().equalsIgnoreCase("OPEN")).
+        view.setCurrency(productofferRepository.findById(offerid).get().getCurrency());
+        view.setAmount(productofferRepository.findById(offerid).get().getQty()*productofferRepository.findById(offerid).get().getUnitprice());
+
+        List<SellerOrderView> orderViews = orders.stream().
                 map(order -> sellerOrderViewService.createSellerOrderView(order.getOrderid())).
-                collect(Collectors.toList()));
+                collect(Collectors.toList());
+
+        view.setOrders( orderViews );
 
         return  view;
 

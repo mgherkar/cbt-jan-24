@@ -11,5 +11,7 @@ public class SellerOfferOrdersView
 {
     String offerid;
     String offername;
-    List<SellerOrderView> orderViewList;
+    String currency;
+    Integer amount;
+    List<SellerOrderView> orders;
 }

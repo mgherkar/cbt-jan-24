@@ -7,11 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-public interface OrderstatusRepository extends JpaRepository<Orderstatus, String> {
-    Optional<Orderstatus> findByStatusIgnoreCase(String status);
+public interface PaymentRepository extends JpaRepository<Payment, String> {
+    Optional<Payment> findByOrderid(String orderid);
 
     @Transactional
     @Modifying
-    @Query("update Orderstatus o set o.status = ?1 where o.orderid = ?2")
-    int updateStatusByOrderid(String status, String orderid);
+    @Query("update Payment p set p.status = ?1 where p.id = ?2")
+    int updateStatusById(String status, String id);
 }
